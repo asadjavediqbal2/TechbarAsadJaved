@@ -1,2 +1,143 @@
 # TechbarAsadJaved
-Test Repo
+Introduction 
+
+This document offers documentation for getALLShippingType
+ API stands for Application Programming Interface which provides an interface between two systems. It’s like a cog that allows two systems to interact with each other. API allows two systems to interact programmatically through the API interface. APIs are often pulling and pushing data underneath user interfaces. Our API uses ‘HTTP/HTTPS’ protocol as the transport format for requests and responses that client making the request for the resource and the API server providing the response can use any programming language or platform.
+We are using JSON objects for receiving responses from our API.  JSON stands for JavaScript Object Notation which is a lightweight data-interchange format. It is a text format that is completely language independent but uses conventions that are familiar to programmers of the C-family of languages, including C, C++, C#, Java, JavaScript, Perl, Python, and many others. These properties make JSON an ideal data-interchange language.
+a.	Base URL
+ A base URL is, basically, the consistent part of any web address. For example, the url used throughout this module is https://dev.api.techbar.com . We'll note that the address section https://dev.api.techbar.com will always appears in the address bar and remains the same. This is our base URL. 
+b.	Endpoint 
+When an API interacts with another system, the touchpoints of this communication are considered endpoints. For APIs, an endpoint can include a URL of a server or service. Each endpoint is the location from which APIs can access the resources they need to carry out their function. There can be multiple endpoints for each API and each endpoint offers a unique functionality. 
+c.	POST
+POST is the HTTP method that is designed to send loads of data to a server from a specified resource. It usually transmits relatively small loads of data to a receiver. This method allows data to be sent as a package in a separate communication with the processing script. This means that data sent through the POST method will not be visible in the URL, as parameters are not sent along with the URL. The format of an HTTP POST should have HTTP headers, followed by a blank line, followed by the request body. POST requests can be used to submit a web form or upload a file, but it is critical to ensure that the receiving application resonates with the format being used. The Content-Type header indicates the type of body in the POST request. For example, in our case content type describes content as JSON and X-Auth header indicates the authentication via API Key.  
+
+d.	Authorization  
+All requests must be authenticated to have access to API. Authentication is done via HTTPS headers. The header will contain the API key that is used to authenticate the client.
+
+getALLShippingType
+
+curl 
+'https://dev.api.techbar.com/graphql' 
+-H 'Accept-Encoding: gzip, deflate, br' 
+-H 'Content-Type: application/json' 
+-H 'Accept: application/json'
+-H 'Connection: keep-alive'
+-H 'DNT: 1' 
+-H 'Origin: https://dev.api.techbar.com' --data-binary '{"query":"getAllShippingType"}' --compressed
+
+Base Url	End Point	Method	Protocol	Response 	Description
+https://dev.api.techbar.com/getALLShippingType 
+getALLShippingType	POST	HTTPS	JSON	This endpoint allow developer to get all the available shipping types
+ 
+a.	Parameters
+getAllShippingType
+Parameters	Required	Data Type	Requirement	Accepted Values
+Url	Yes	String	The URL must be a Valid url.	https://dev.api.techbar.com/getALLShippingType
+
+End point	Yes	String	The end point must be Valid.	getALLShippingType
+id	Yes	ID	Must be a scalar type, represents a unique identifier	
+shipment_name	Yes	String
+	Must be a string 	Enter name
+shipment_price	Yes	Float	Must be a numeric digit	Enter price
+delivery_time_days	Yes	String	Must be a string	Enter days
+Threshold 	Yes	Float	Must be a numeric digit	Set a threshold value
+Icon	Yes	String	Must be a string	Select from the images
+hours	Yes	String	Must be a string	Enter 
+Minutes	Yes	String	Must be a string	Enter
+am_pm	Yes	String	Must be a string	Select 
+time_zone:	Yes	String	Must be a string	Select 
+tracking_url	Yes	String	Must be a string	
+supplierId	Yes	ID	Must be a scalar type, represents a unique identifier	
+BusinessLocation	Yes	BusinessLocation		
+
+ 
+b.	Sample Requests
+
+POST	https://dev.api.techbar.com/getALLShippingType
+
+Curl requests	curl 'https://dev.api.techbar.com/'
+ -H 'Accept-Encoding: gzip, deflate, br' 
+-H 'Content-Type: application/json' 
+-H 'Accept: application/json' 
+-H 'Connection: keep-alive' 
+-H 'DNT: 1' 
+-H 'Origin: https: //dev.api.techbar.com' --data-binary '
+{"query":"query {\n  getAllShippingType
+                              {\n    
+                                        _id\n   
+                                       shipment_name\n 
+                                        \tshipment_price\n  
+                                       delivery_time_days\n   
+                                       threshold\n   
+                                       icon\n  
+                                       user {\n      
+                                       username\n    
+                                      name\n  
+                                  }
+                        \n  }
+               \n}
+\n"}' --compressed
+
+
+
+
+c.	Responses 
+i.	Successful Request’s Response 
+Response JSON	HTTPS/1.1  200 OK
+Content-Type: application/json 
+{
+ "jsonapi": { "version": "1.0" },
+ “Status”: [
+ "code": 200,
+ "message": "OK", 
+],
+ }
+Response Code
+Parameters 	Data Type 	Required	Description
+
+200
+code	int	yes	The request code is a pre-defined code which describes the status of the request if it was successful or unsuccessful. The 200 response code tells us that the request was successful.
+	Message 	String 	yes	The Message offers information about the request as per the code.
+
+ii.	Bad Request
+Response JSON	HTTPS/1.1 400 BAD REQUEST 
+Content-Type: application/json
+ { 
+          "jsonapi": { "version": "1.0" }, 
+          "error": [  "code": "400", "source":
+                        {                                                                                                                                   
+            "detail": "Please check attribute naming"
+                            } 
+                  ]
+ }
+Response Code
+Parameters 	Data Type 	Required	Description
+
+400
+code	int	yes	The request code is a pre-defined code which describes the status of the request if it was successful or unsuccessful. The 400 response code tells us that there is some problem with the parameters.
+	message	string	yes	The Message offers information about the request as per the code.
+
+iii.	Unauthorized Access
+Response JSON	HTTPS/1.1 401 UNAUTHORIZED 
+Content-Type: application/json 
+{
+         "jsonapi": { "version": "1.0" }, 
+"error": [ 
+                       {
+                     "code": "401",
+                     "source": { "/ getAllShippingType ": 
+                     "/header/attributes/x-auth" },
+              "message": "API Key is incorrect or expired", "detail": 
+               "Please contact the support department" 
+                       } 
+               ] 
+}
+Response Code
+Parameters 	Data Type 	Required	Description
+
+200
+code	int	yes	The request code is a pre-defined code which describes the status of the request if it was successful or unsuccessful. The 200 response code tells us that the request was successful.
+	Message 	String 	yes	The Message offers information about the request as per the code.
+
+
+
